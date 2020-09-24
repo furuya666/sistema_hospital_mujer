@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFaltasTable extends Migration
+class CreateEspecialidadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateFaltasTable extends Migration
      */
     public function up()
     {
-        Schema::create('faltas', function (Blueprint $table) {
+        Schema::create('especialidads', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('persona_id')->unsigned();
-            $table->date('fecha');
+            $table->string('tipo');
             $table->timestamps();
-            $table->foreign('persona_id')->references('id')->on('personas');
         });
     }
 
@@ -29,6 +27,6 @@ class CreateFaltasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('faltas');
+        Schema::dropIfExists('especialidads');
     }
 }

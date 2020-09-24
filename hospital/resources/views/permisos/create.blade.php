@@ -17,6 +17,7 @@
 <table class="table table-light table-hover">
 <form action=" {{url('/permisos')}}" method="POST" enctype="multipart/form-data" autocomplete="off" class="form-horizontal">
 {{ csrf_field()}}
+
 <tr>
   <td>
 <div class="form-group">
@@ -31,47 +32,49 @@
 <div class="form-group">
 <label for="Tipo" class="control-label">{{'Motivo de Permiso'}}</label>
 
-<select name="tipo" id="tipo"  class="form-control {{$errors->has('tipo')? 'is-invalid':''}}" required>
-            <option value="{{ isset($permiso->tipo)?$permiso->tipo:old('tipo')}}" selected="selected"  >{{ isset($permiso->tipo)?$permiso->tipo:old('tipo')}}</option>
-            <option value="cumpleaños">Cumpleaños</option>
-            <option value="urgencia">Urgencia</option>
-            <option value="baja medica">Baja Medica</option>
-            <option value="actividades programadas">Actividades Programadas</option>
+<select name="tipo_id" id="tipo_id"  class="form-control {{$errors->has('tipo_id')? 'is-invalid':''}}" required>
+            <option value="{{ isset($permiso->tipo_id)?$permiso->tipo_id:old('tipo_id')}}" selected="selected"  >{{ isset($permiso->tipo_id)?$permiso->tipo_id:old('tipo_id')}}</option>
+            <option value="3">Cumpleaños</option>
+            <option value="1">Urgencia</option>
+            <option value="2">Baja Medica</option>
+            <option value="4">Actividades Programadas</option>
         </select>
-{!!  $errors->first('tipo','<div class="invalid-feedback">:message</div>')!!}
+{!!  $errors->first('tipo_id','<div class="invalid-feedback">:message</div>')!!}
 </div>
 </td>
 </tr>
 <tr>
-  <td>
-<div class="form-group">
-<label for="Fecha" class="control-label">{{'Fecha Inicio Permiso'}}</label>
-<input type="date"class="form-control {{$errors->has('fecha_inicio')? 'is-invalid':''}}" name="fecha_inicio" id="fecha_inicio"   value="{{ isset($permiso->fecha_inicio)?$permiso->fecha_inicio:old('fecha_inicio')}}"
-
-required>
-{!!  $errors->first('fecha_inicio','<div class="invalid-feedback">:message</div>')!!}
-</div>
-</td>
 <td>
 <div class="form-group">
-<label for="Hora" class="control-label">{{'Hora Inicio Permiso'}}</label>
-<input type="time" class="form-control {{$errors->has('hora_inicio')? 'is-invalid':''}}"name="hora_inicio" id="hora_inicio" value="{{ isset($permiso->hora_inicio)?$permiso->hora_inicio:old('hora_inicio')}}"
-
+<label for="Fecha" class="control-label">{{'Hora Permiso'}}</label>
+<input type="time"class="form-control {{$errors->has('hora_ini')? 'is-invalid':''}}" name="hora_ini" id="hora_ini"   value="{{ isset($permiso->hora_ini)?$permiso->hora_ini:old('hora_ini')}}"
 required>
-{!!  $errors->first('hora_inicio','<div class="invalid-feedback">:message</div>')!!}
+{!!  $errors->first('hora_ini','<div class="invalid-feedback">:message</div>')!!}
 </div>
 </td>
+  <td>
+<div class="form-group">
+<label for="Dia" class="control-label">{{'Fecha Inicio Del Permiso'}}</label>
+<input type="date"class="form-control {{$errors->has('ini_permiso')? 'is-invalid':''}}" name="ini_permiso" id="ini_permiso"   value="{{ isset($permiso->ini_permiso)?$permiso->ini_permiso:old('ini_permiso')}}"
+required>
+        {!!  $errors->first('ini_permiso','<div class="invalid-feedback">:message</div>')!!}
+         <br> 
+        
+</div>
+</td>
+
 </tr>
 <tr>
   <td>
-<div class="form-group">
-<label for="Fecha" class="control-label">{{'Fecha Fin Permiso'}}</label>
-<input type="date"class="form-control {{$errors->has('fecha_fin')? 'is-invalid':''}}" name="fecha_fin" id="fecha_fin"   value="{{ isset($permiso->fecha_fin)?$permiso->fecha_fin:old('fecha_fin')}}"
-
+  <div class="form-group">
+<label for="Dia" class="control-label">{{'Fecha Inicio Del Permiso'}}</label>
+<input type="date"class="form-control {{$errors->has('fin_permiso')? 'is-invalid':''}}" name="fin_permiso" id="fin_permiso"   value="{{ isset($permiso->fin_permiso)?$permiso->fin_permiso:old('fin_permiso')}}"
 required>
-{!!  $errors->first('fecha_fin','<div class="invalid-feedback">:message</div>')!!}
+        {!!  $errors->first('fin_permiso','<div class="invalid-feedback">:message</div>')!!}
+         <br> 
+        
 </div>
-</td>
+  </td>
 </tr>
 <tr>
 <td>

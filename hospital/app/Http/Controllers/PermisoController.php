@@ -51,10 +51,10 @@ class PermisoController extends Controller
         //
         $campos=[
             'persona_id'=>'required',
-            'tipo'=>'required|string',
-            'fecha_inicio'=>'required|string',
-            'hora_inicio'=>'required|string',
-            'fecha_fin'=>'required|string'
+            'tipo_id'=>'required|string',
+            'hora_ini'=>'required|string',
+            'ini_permiso'=>'required|date',
+            'fin_permiso'=>'required|date'
         ];
         $Mensaje=["required"=>'El :attribute es requerido'];
         $this->validate($request,$campos,$Mensaje);
@@ -73,22 +73,35 @@ class PermisoController extends Controller
      */
     public function show(Request $request)
     {
-        $id=$request->get('Buscador');
+
         $mes=$request->get('Buscador1');
-        $per=$request->get('Buscador2');
-        $año=$request->get('Buscador3');
-        $permisos=DB::table('permisos')
-        ->select('permisos.*')
-        ->where('persona_id','like',"%$id%")
-        ->where('tipo','like',"%$per%")
-        ->where('fecha_inicio', 'like',"%$mes%")
-        ->where('fecha_inicio','like',"%$año%")
-        ->get();
-        $datos=compact('permisos');
-        $pdf= PDF::loadView('permisos/show',$datos);
-        return $pdf->stream();
-        
-        
+        $año=$request->get('Buscador2');
+        $a=$request->get('Buscador3');
+        $per=$request->get('Buscador4');
+        if($a==null){
+            $permisos=DB::table('permisos')
+            ->select('permisos.*')
+            ->join('personas','permisos.persona_id','personas.id')
+            ->where('tipo_id','like',"%$per%")
+            ->where('ini_permiso', 'like',"%$mes%")
+            ->where('ini_permiso','like',"%$año%")
+            ->get();
+            $datos=compact('permisos');
+            $pdf= PDF::loadView('permisos/show',$datos);
+            return $pdf->stream();
+        }else{
+            $permisos=DB::table('permisos')
+            ->select('permisos.*')
+            ->join('personas','permisos.persona_id','personas.id')
+            ->where('tipo_id','like',"%$per%")
+            ->where('persona_id','like',"%$a%")
+            ->where('ini_permiso', 'like',"%$mes%")
+            ->where('ini_permiso','like',"%$año%")
+            ->get();
+            $datos=compact('permisos');
+            $pdf= PDF::loadView('permisos/show',$datos);
+            return $pdf->stream();
+        } 
     }
 
     /**

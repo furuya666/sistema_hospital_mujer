@@ -14,33 +14,51 @@
             </ul>
     </div>
     @endif
+    <table class="table table-light table-hover">
 <form action=" {{url('/vacacions')}}" method="POST" enctype="multipart/form-data" autocomplete="off" class="form-horizontal">
 {{ csrf_field()}}
+
+<tr>
+  <td>
 <div class="form-group">
 <label for="Ci" class="control-label">{{'Ci'}}</label>
 <input type="text" name="persona_id" id="persona_id" class="form-control {{$errors->has('persona_id')? 'is-invalid':''}}" value="{{ isset($vacacion->persona_id)?$vacacion->persona_id:old('persona_id')}}"
-required>
+ required>
 {!!  $errors->first('persona_id','<div class="invalid-feedback">:message</div>')!!}
 
 </div>
-
+</td>
+<td>
 <div class="form-group">
-<label for="inicio_vacaciones" class="control-label">{{'Inicio Vacacion'}}</label>
-<input type="date"class="form-control {{$errors->has('inicio_vacaciones')? 'is-invalid':''}}" name="inicio_vacaciones" id="inicio_vacaciones"   value="{{ isset($vacacion->inicio_vacaciones)?$vacacion->inicio_vacaciones:old('inicio_vacaciones')}}"
+<label for="Dia" class="control-label">{{' Fecha Inicio De Vacacion'}}</label>
+<input type="date" name="ini_vacacion" id="ini_vacacion" class="form-control {{$errors->has('ini_vacacion')? 'is-invalid':''}}" value="{{ isset($vacacion->ini_vacacion)?$vacacion->ini_vacacion:old('ini_vacacion')}}"
+ required>
 
-required>
-{!!  $errors->first('inicio_vacaciones','<div class="invalid-feedback">:message</div>')!!}
+        {!!  $errors->first('ini_vacacion','<div class="invalid-feedback">:message</div>')!!}
+         <br>     
 </div>
+</td>
+</tr>
+<tr>
+<td>
 <div class="form-group">
-<label for="fin_vacaciones" class="control-label">{{'Fin Vacacion'}}</label>
-<input type="date"class="form-control {{$errors->has('fin_vacaciones')? 'is-invalid':''}}" name="fin_vacaciones" id="fin_vacaciones"   value="{{ isset($vacacion->fin_vacaciones)?$vacacion->fin_vacaciones:old('fin_vacaciones')}}"
+<label for="Dia" class="control-label">{{' Fecha Fin De Vacacion'}}</label>
+<input type="date" name="fin_vacacion" id="fin_vacacion" class="form-control {{$errors->has('fin_vacacion')? 'is-invalid':''}}" value="{{ isset($vacacion->fin)?$vacacion->fin_vacacion:old('fin_vacacion')}}"
+ required>
 
-required>
-{!!  $errors->first('fin_vacaciones','<div class="invalid-feedback">:message</div>')!!}
+        {!!  $errors->first('fin_vacacion','<div class="invalid-feedback">:message</div>')!!}
+         <br>     
 </div>
+</td>
 
+</tr>
+<tr>
+<td>
 <input type="submit" value="Agregar" class="btn btn-success">
 <a href="{{ url('vacacions')}}" class="btn btn-secondary">Regresar</a>
+</td>
+</tr>
 </form>
+</table>
 </div>
 @endsection

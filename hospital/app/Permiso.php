@@ -12,4 +12,7 @@ class Permiso extends Model
   public function persona(){
       return $this->belongsTo(Persona::class);
   }
+  public function tipo(){
+    return $this->belongsTo(tipo_permiso::class);
+}
 }

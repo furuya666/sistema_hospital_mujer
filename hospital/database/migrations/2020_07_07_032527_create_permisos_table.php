@@ -16,12 +16,13 @@ class CreatePermisosTable extends Migration
         Schema::create('permisos', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('persona_id')->unsigned();
-            $table->string('tipo');
-            $table->string('fecha_inicio');
-            $table->string('hora_inicio');
-            $table->string('fecha_fin');
+            $table->bigInteger('tipo_id')->unsigned();
+            $table->date('ini_permiso');
+            $table->date('fin_permiso');
+            $table->string('hora_ini');
             $table->timestamps();
             $table->foreign('persona_id')->references('id')->on('personas');
+            $table->foreign('tipo_id')->references('id')->on('tipo_permisos');
         });
     }
 

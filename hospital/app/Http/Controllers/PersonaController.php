@@ -21,9 +21,10 @@ class PersonaController extends Controller
     {
         //
         $id=$request->get('Buscador');
-        $datos['personas']=DB:: table('personas')
-        ->where('id','like',"%$id%")
-        ->orderBy('personas.nombre', 'asc')
+        $datos['personas']=DB:: table('especialidads')
+        ->join('personas','personas.especialidad_id','especialidads.id')
+        ->where('personas.id','like',"%$id%")
+        ->orderBy('nombre')
         ->paginate(5);
 
         return view('personas.index',$datos);
@@ -55,10 +56,9 @@ class PersonaController extends Controller
         'nombre' => 'required|string|',
         'apellido_paterno' => 'required|string|',
         'apellido_materno' => 'required|string|',
-        'dia' => 'required|integer',
-        'mes' => 'required|string',
-        'año' => 'required|integer',
-        'telefono' => 'required|integer'
+        'cumpleaños' => 'required|date',
+        'telefono' => 'required|integer',
+        'especialidad_id' => 'required|string'
         ];
         $Mensaje=["required"=>'El :attribute es requerido'];
         $this->validate($request,$campos,$Mensaje);
@@ -73,15 +73,17 @@ class PersonaController extends Controller
      * @param  \App\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
         //
-        $persona=Persona::find($id);
-       
-        //$persona= Persona::all();
-        $pdf= PDF::loadView('personas/show',compact('persona'));
-        
-        return $pdf->stream('persona');
+            $a=$request->get('Buscador1');
+            $personas=DB::table('personas')
+            ->select('personas.*')
+            ->where('especialidad_id','like',"%$a%")
+            ->get();
+            $datos=compact('personas');
+            $pdf= PDF::loadView('personas/show',$datos);
+            return $pdf->stream();
     }
 
     /**
@@ -112,10 +114,9 @@ class PersonaController extends Controller
             'nombre' => 'required|string|',
             'apellido_paterno' => 'required|string|',
             'apellido_materno' => 'required|string|',
-            'dia' => 'required|integer',
-            'mes' => 'required|string',
-            'año' => 'required|integer',
-            'telefono' => 'required|integer'
+            'cumpleaños'=>'required|date',
+            'telefono' => 'required|integer',
+            'especialidad_id'=>'required|string'
             ];
         $Mensaje=["required"=>'El :attribute es requerido'];
         $this->validate($request,$campos,$Mensaje);

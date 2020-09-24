@@ -16,14 +16,14 @@ class CreatePersonasTable extends Migration
     {
         Schema::create('personas', function (Blueprint $table) {
             $table->id()->string();
+            $table->bigInteger('especialidad_id')->unsigned();
             $table->string('nombre');
             $table->string('apellido_paterno');
             $table->string('apellido_materno');
-            $table->string('dia');
-            $table->string('mes');
-            $table->string('año');
+            $table->date('cumpleaños');
             $table->string('telefono');
             $table->timestamps();
+            $table->foreign('especialidad_id')->references('id')->on('especialidads');
         });
     }
 

@@ -8,16 +8,15 @@
 <body>
 <style>
 
-    td,th {
-	border: 5px solid black;
+table {
+  border-collapse: collapse;
+}
+td,th {
+  border: black 3px solid;
 }
 th{
-        color: blue;
-    }
-    table{
-        border: 1px;
-    }
-
+    background: #E9ECEF ;
+}
 </style>
 <h3><i>La Paz {{date('d-m-Y')}}</i></h3>
 <h3><center><i> Hospital De La Mujer La Paz Bolivia</i></center></h3> 
@@ -28,11 +27,11 @@ th{
     <thead class="thead-light" >
     <tr>
            
-            <th width="24%">Ci</th>
-            <th width="25%">Motivo</th>
-            <th width="25%">Fecha Inicio</th>
-            <th width="26%">Hora Inicio</th>
-            <th width="25%">Fecha Fin</th>
+            <th width="20%">Ci</th>
+            <th width="20%">Motivo</th>
+            <th width="20%">Hora Inicio</th>
+            <th width="20%">Inicio Permiso</th>
+            <th width="20%">Fin Permiso</th>
            
             
     </thead>
@@ -42,12 +41,35 @@ th{
         <tr>
             
             
-            <td width="25%"><center>{{$permiso->persona_id}}</center></td>
-            <td width="25%"><center>{{$permiso->tipo}}</center></td>
-            <td width="25%"><center>{{$permiso->fecha_inicio}}</center></td>
-            <td width="25%"><center>{{$permiso->hora_inicio}}</center></td>
-            <td width="25%"><center>{{$permiso->fecha_fin}}</center></td>
-           <!--<td><a href="{{ url('/permisos/' .$permiso->id)}}" class="btn btn-dark">Reporte</a></td> -->
+            <td width="20%"><center>{{$permiso->persona_id}}</center></td>
+            <td width="20%"><center>
+<?php
+            if( $permiso->tipo_id==1){
+                echo "Urgencia";
+             }else{
+                 if($permiso->tipo_id==2){
+                    echo "Baja Medica";
+                 }else{
+                     if($permiso->tipo_id==3){
+                          echo "Cumpleaños";
+                     }else{
+                         echo "Actividades Programadas";
+                     }
+                 }
+             }
+
+
+             ?>
+
+
+
+
+            </center></td>
+            <td width="15%"><center>{{$permiso->hora_ini}}</center></td>
+           
+            <td width="25%"><center>{{$permiso->ini_permiso}}</center></td>
+            <td width="25%"><center>{{$permiso->fin_permiso}}</center></td>
+         
         </tr>
         @endforeach
         

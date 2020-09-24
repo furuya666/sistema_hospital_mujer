@@ -14,7 +14,7 @@
 <br>
    <nav class="navbar navbar-light float-right">
   <form class="form-inline">
-  <a href="{{ url('files')}}" class=" btn btn-secondary my-2 my-sm-0">Volver Atras</a>
+  <a href="{{ url('files')}}" class=" btn btn-dark my-2 my-sm-0">Atras</a>
     <input  name="Buscador"class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" autocomplete="off">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
   </form>
@@ -30,7 +30,6 @@
             <th>Nombre</th>
             <th>Apellido Paterno</th>
             <th>Apellido Materno</th>
-            <th>PDF</th>
             <th>Accion</th>
             <th>Reporte</th>
         </tr>
@@ -44,8 +43,6 @@
             <td>{{$file->nombre}}</td>
             <td>{{$file->apellido_paterno}}</td>
             <td>{{$file->apellido_materno}}</td>
-            <td><a href="{{ asset('storage').'/'.$file->pdf}}"><i class="fas fa-file-pdf"></i></a></td>
-            
             
             <td>
                 <a href="{{url('/files/'.$file->id .'/edit')}}" class=" btn btn-dark">Editar</a>

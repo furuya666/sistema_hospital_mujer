@@ -48,7 +48,7 @@ class FaltaController extends Controller
         //
         $campos=[
             'persona_id'=>'required',
-            'fecha'=>'required|string'
+            'fecha'=>'required|date'
            
         ];
         $Mensaje=["required"=>'El :attribute es requerido'];
@@ -68,19 +68,34 @@ class FaltaController extends Controller
     public function show(Request $request)
     {
         //
-        $id=$request->get('Buscador');
         $mes=$request->get('Buscador1');
         $año=$request->get('Buscador2');
-        $faltas=DB::table('faltas')
-        ->select('faltas.*')
-        ->where('persona_id','like',"%$id%")
-        ->where('fecha','like',"%$mes%")
-        ->where('fecha','like',"%$año%")
-        ->get();
-        $datos=compact('faltas');
-        $pdf= PDF::loadView('faltas/show',$datos);
-        return $pdf->stream();
+        $a=$request->get('Buscador3');
+        if($a==null){
+            $faltas=DB::table('faltas')
+            ->select('faltas.*','personas.*')
+            ->join('personas','faltas.persona_id','personas.id')
+            ->where('fecha','like',"%$mes%")
+            ->where('fecha','like',"%$año%")
+            ->get();
+            $datos=compact('faltas');
+            $pdf= PDF::loadView('faltas/show',$datos);
+            return $pdf->stream();
+        }else{
+            $faltas=DB::table('faltas')
+            ->select('faltas.*','personas.*')
+            ->join('personas','faltas.persona_id','personas.id')
+            ->where('faltas.persona_id','like',"%$a%")
+            ->where('fecha','like',"%$mes%")
+            ->where('fecha','like',"%$año%")
+            ->get();
+            $datos=compact('faltas');
+            $pdf= PDF::loadView('faltas/show',$datos);
+            return $pdf->stream();
+        }
+       
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -88,11 +103,8 @@ class FaltaController extends Controller
      * @param  \App\falta  $falta
      * @return \Illuminate\Http\Response
      */
-    public function edit(falta $falta)
-    {
-        //
-    }
-
+    
+  
     /**
      * Update the specified resource in storage.
      *

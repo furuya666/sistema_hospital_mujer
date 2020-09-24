@@ -24,8 +24,7 @@ Route::resource('personas', 'PersonaController')->middleware('auth');
 Route::resource('permisos', 'PermisoController')->middleware('auth');
 Route::resource('vacacions', 'VacacionController')->middleware('auth');
 Route::resource('files','FileController')->middleware('auth');
-Route::resource('faltas', 'FaltaController');
+Route::resource('faltas', 'FaltaController')->middleware('auth');
 Auth::routes(['reset'=>false]);
-//Route::get('/personapdf','PersonaController@pdfpersona');
-
+//Auth::routes(['register'=>false,'reset'=>false]);
 Route::get('/home', 'HomeController@index')->name('home');

@@ -48,8 +48,8 @@ class VacacionController extends Controller
         //
         $campos=[
            'persona_id'=>'required',
-           'inicio_vacaciones'=>'required|string',
-           'fin_vacaciones'=>'required|string'
+           'ini_vacacion'=>'required|date',
+           'fin_vacacion'=>'required|date'
         ];
         $Mensaje=["required"=>'El :attribute es requerido'];
         $this->validate($request,$campos,$Mensaje);
@@ -69,20 +69,34 @@ class VacacionController extends Controller
     public function show(Request $request)
     {
         //
-        $id=$request->get('Buscador');
         $mes=$request->get('Buscador1');
         $año=$request->get('Buscador2');
-        $vacacions=DB::table('vacacions')
-        ->select('vacacions.*')
-        ->where('persona_id','like',"%$id%")
-        ->where('inicio_vacaciones','like',"%$mes%")
-        ->where('inicio_vacaciones','like',"%$año%")
-        ->get();
-        $datos=compact('vacacions');
-        $pdf= PDF::loadView('vacacions/show',$datos);
-        return $pdf->stream();
-        
+        $a=$request->get('Buscador3');
+        if($a==null){
+            $vacacions=DB::table('vacacions')
+            ->select('vacacions.*','personas.*')
+            ->join('personas','vacacions.persona_id','personas.id')
+            ->where('ini_vacacion','like',"%$mes%")
+            ->where('ini_vacacion','like',"%$año%")
+            ->get();
+            $datos=compact('vacacions');
+            $pdf= PDF::loadView('vacacions/show',$datos);
+            return $pdf->stream();
+        }else{
+            $vacacions=DB::table('vacacions')
+            ->select('vacacions.*','personas.*')
+            ->join('personas','vacacions.persona_id','personas.id')
+            ->where('persona_id','like',"%$a%")
+            ->where('ini_vacacion','like',"%$mes%")
+            ->where('ini_vacacion','like',"%$año%")
+            ->get();
+            $datos=compact('vacacions');
+            $pdf= PDF::loadView('vacacions/show',$datos);
+            return $pdf->stream();
+        }
+       
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -93,8 +107,7 @@ class VacacionController extends Controller
     public function edit($id)
     {
         //
-        $vacacion=Vacacion::findOrFail($id);
-        return view('vacacions.edit',compact('vacacion'));
+      
     }
 
     /**

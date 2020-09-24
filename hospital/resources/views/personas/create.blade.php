@@ -50,7 +50,7 @@ required>
 <td>
 <div class="form-group">
 <label for="ApellidoMaterno" class="control-label">{{'Apellido Materno'}}</label>
-<input type="text" class="form-control {{$errors->has('apellido_materno')? 'is-invalid':''}}"name="apellido_materno" id="apellido_materno" value="{{ isset($persona->apellido_paterno)?$persona->apellido_materno:old('apellido_materno')}}"
+<input type="text" class="form-control {{$errors->has('apellido_materno')? 'is-invalid':''}}"name="apellido_materno" id="apellido_materno" value="{{ isset($persona->apellido_materno)?$persona->apellido_materno:old('apellido_materno')}}"
 
 required>
 {!!  $errors->first('apellido_materno','<div class="invalid-feedback">:message</div>')!!}
@@ -58,45 +58,13 @@ required>
 </td>
 </tr>
 <tr>
-  <td>
-<div class="form-group">
-<label for="Dia" class="control-label">{{'Dia'}}</label>
-<input type="number" name="dia" id="dia" class="form-control {{$errors->has('dia')? 'is-invalid':''}}"  value="{{ isset($persona->dia)?$persona->dia:old('dia')}}"
-
-required>
-{!!  $errors->first('dia','<div class="invalid-feedback">:message</div>')!!}
-</div>
-</td>
 <td>
 <div class="form-group">
-<label for="Mes" class="control-label">{{'Mes'}}</label>
-<select name="mes" id="mes" class="form-control {{$errors->has('mes')? 'is-invalid':''}}" required>
-            <option value="{{ isset($persona->mes)?$persona->mes:old('mes')}}" selected="selected"  >{{ isset($persona->mes)?$persona->mes:old('mes')}}</option>
-            <option value="enero">Enero</option>
-            <option value="febrero">Febrero</option>
-            <option value="marzo">Marzo</option>
-            <option value="abril">Abril</option>
-            <option value="mayo">Mayo</option>
-            <option value="junio">Junio</option>
-            <option value="julio">Julio</option>
-            <option value="agosto">Agosto</option>
-            <option value="septiembre">Septiembre</option>
-            <option value="octubre">Octubre</option>
-            <option value="noviembre" >Noviembre</option>
-            <option value="diciembre">Diciembre</option>
-        </select>
-        {!!  $errors->first('mes','<div class="invalid-feedback">:message</div>')!!}
-</div>
-</td>
-</tr>
-<tr>
-  <td>
-<div class="form-group">
-<label for="Año" class="control-label">{{'Año'}}</label>
-<input type="number" name="año" id="año" class="form-control {{$errors->has('año')? 'is-invalid':''}}" value="{{ isset($persona->año)?$persona->año:old('año')}}"
+<label for="Año" class="control-label">{{'Cumpleaños'}}</label>
+<input type="date" name="cumpleaños" id="cumpleaños" class="form-control {{$errors->has('cumpleaños')? 'is-invalid':''}}" value="{{ isset($persona->cumpleaños)?$persona->cumpleaños:old('cumpleaños')}}"
 
 required>
-{!!  $errors->first('año','<div class="invalid-feedback">:message</div>')!!}
+{!!  $errors->first('cumpleaños','<div class="invalid-feedback">:message</div>')!!}
 </div>
 </td>
 <td>
@@ -109,7 +77,22 @@ required>
 </div>
 </td>
 </tr>
-
+<tr>
+<td>
+<div class="form-group">
+<label for="especialidad" class="control-label">{{'Especialidad'}}</label>
+<select name="especialidad_id" id="especialidad_id"  class="form-control {{$errors->has('especialidad_id')? 'is-invalid':''}}"  required>
+           <option value="{{ isset($persona->especialidad_id)?$persona->especialidad_id:old('especialidad_id')}}" selected="selected"  >{{ isset($persona->especialidad_id)?$persona->especialidad_id:old('especialidad_id')}}</option>
+           <option value="1">Urologia</option>
+           <option value="2">Dermatologia</option>
+           <option value="3">Oftalmologia</option>
+           <option value="4">Traumatologia</option>
+        </select>
+{!!  $errors->first('especialidad_id','<div class="invalid-feedback">:message</div>')!!}
+</div>
+</td>
+<td>
+</tr>
 <tr>
   <td>
 <input type="submit" value="Agregar" class="btn btn-success">

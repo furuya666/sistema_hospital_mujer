@@ -21,6 +21,8 @@ class Persona extends Model
     public function faltas(){
         return $this->hasMany(falta::class);
     }
-  
+    public function especialidad(){
+        return $this->belongsTo(especialidad::class);
+      }
     
 }

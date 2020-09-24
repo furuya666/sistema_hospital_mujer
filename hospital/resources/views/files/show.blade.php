@@ -9,14 +9,15 @@
 </head>
 <body >
 <style>
-
-    td {
-	border: 5px solid black;
-  
+table {
+  border-collapse: collapse;
 }
-label{
-       color: blue;
-   }
+td {
+  border: black 3px solid;
+}
+  
+
+
 
 </style>
 <h3><i>La Paz {{date('d-m-Y')}}</i></h3>
@@ -253,6 +254,7 @@ label{
 {!!  $errors->first('fotografia','<div class="invalid-feedback">:message</div>')!!}
 </div>
 </td>
+<td></td>
 </tr>
 
 </table>
