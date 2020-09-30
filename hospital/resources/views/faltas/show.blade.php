@@ -41,8 +41,9 @@ td,th {
         <tr>
             
             <td width="20%"><center>{{$loop->iteration}}</center></td>
-            <td width="25%"><center>{{$falta->nombre}} {{$falta->apellido_paterno}} {{$falta->apellido_materno}}</center></td>
             <td width="25%"><center>{{$falta->persona_id}}</center></td>
+            <td width="25%"><center>{{$falta->nombre}} {{$falta->apellido_paterno}} {{$falta->apellido_materno}}</center></td>
+           
             <td width="25%"><center>{{$falta->fecha}}</center></td>
         </tr>
         @endforeach

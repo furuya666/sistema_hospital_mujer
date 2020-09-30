@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\File;
+use App\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -74,8 +75,25 @@ class FileController extends Controller
             if($request->hasfile('pdf')){
                 $datosFile['pdf']=$request->file('pdf')->store('uploads','public');
             }
-            File::insert($datosFile);
-            return redirect('files')->with('Mensaje','File agregado con exito');
+            ///
+            $da =Persona::where('id',$request->input('persona_id'))->count();
+            $de =File::where('persona_id',$request->input('persona_id'))->count();
+            if($da > 0){
+                if($de > 0){
+                    return redirect('files/create')->with('Mensaje','Esta Persona Ya Tiene Un File Designado');
+                }
+                File::insert($datosFile);
+               return redirect('files')->with('Mensaje','File agregado con exito');
+            
+            }else{
+                return redirect('files/create')->with('Mensaje','No Existe Ningun Registro Con El CI Que Ingreso');
+            }
+          //
+           // File::insert($datosFile);
+           // return redirect('files')->with('Mensaje','File agregado con exito');
+            
+            ////
+           
     }
 
     /**

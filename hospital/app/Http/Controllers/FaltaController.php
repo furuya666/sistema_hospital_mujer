@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\falta;
+use App\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -55,8 +56,16 @@ class FaltaController extends Controller
         $this->validate($request,$campos,$Mensaje);
         $datosFalta=request()->all();
         $datosFalta=request()->except('_token');
-        falta::insert($datosFalta);
-        return redirect('faltas')->with('Mensaje','Falta asignado con exito');
+        ////
+        $da =Persona::where('id',$request->input('persona_id'))->count();
+        if($da > 0){
+            falta::insert($datosFalta);
+            return redirect('faltas')->with('Mensaje','Falta asignado con exito');
+        }else{
+            return redirect('faltas/create')->with('Mensaje','No Existe Ningun Registro Con El CI Que Ingreso');
+        }
+        ///
+        
     }
 
     /**

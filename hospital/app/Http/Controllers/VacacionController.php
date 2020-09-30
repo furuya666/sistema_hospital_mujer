@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Vacacion;
+use App\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -55,8 +56,17 @@ class VacacionController extends Controller
         $this->validate($request,$campos,$Mensaje);
         $datosVacacion=request()->all();
         $datosVacacion=request()->except('_token');
-        Vacacion::insert($datosVacacion);
-        return  redirect('vacacions')->with('Mensaje','Vacacion asignada con exito');
+        ///
+        $da =Persona::where('id',$request->input('persona_id'))->count();
+        if($da > 0){
+            Vacacion::insert($datosVacacion);
+            return  redirect('vacacions')->with('Mensaje','Vacacion asignada con exito');   
+        
+        }else{
+            return redirect('vacacions/create')->with('Mensaje','No Existe Ningun Registro Con El CI Que Ingreso');
+        }
+        /////
+       
 
     }
 

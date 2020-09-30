@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Permiso;
-
+use App\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -60,8 +60,16 @@ class PermisoController extends Controller
         $this->validate($request,$campos,$Mensaje);
         $datosPermiso=request()->all();
         $datosPermiso=request()->except('_token');
-        Permiso::insert($datosPermiso);
-        return redirect('permisos')->with('Mensaje','Permiso asignado con exito');
+        ////
+        $da =Persona::where('id',$request->input('persona_id'))->count();
+        if($da > 0){
+            Permiso::insert($datosPermiso);
+            return redirect('permisos')->with('Mensaje','Permiso asignado con exito');
+        }else{
+            return redirect('permisos/create')->with('Mensaje','No Existe Ningun Registro Con El CI Que Ingreso');
+        }
+        ////
+       
 
     }
 

@@ -25,7 +25,7 @@ class PersonaController extends Controller
         ->join('personas','personas.especialidad_id','especialidads.id')
         ->where('personas.id','like',"%$id%")
         ->orderBy('nombre')
-        ->paginate(5);
+        ->paginate(3);
 
         return view('personas.index',$datos);
     }
@@ -63,8 +63,17 @@ class PersonaController extends Controller
         $Mensaje=["required"=>'El :attribute es requerido'];
         $this->validate($request,$campos,$Mensaje);
         $datosPersona=request()->except('_token');
-        Persona::insert($datosPersona);
+        ////////
+        $da =Persona::where('id',$request->input('id'))->count();
+        if($da > 0){
+            return redirect('personas/create')->with('Mensaje','El CI Que Ingreso Ya Existe');
+        }else{
+            Persona::insert($datosPersona);
         return redirect('personas')->with('Mensaje','Persona agregada con exito');
+        }
+
+        ////
+       
     }
 
     /**

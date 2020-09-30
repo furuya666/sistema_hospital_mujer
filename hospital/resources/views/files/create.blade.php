@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+@if(Session::has('Mensaje'))
+    <div class="alert alert-danger" role="alert">
+  {{ Session::get('Mensaje') }}  
+    </div>
+
+@endif
 <div class="container">
    
         @if(count($errors)>0)
