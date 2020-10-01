@@ -90,7 +90,7 @@ required>
 <select name="especialidad_id" id="especialidad_id"  class="form-control {{$errors->has('especialidad_id')? 'is-invalid':''}}"  required>
            <option value="{{ isset($persona->especialidad_id)?$persona->especialidad_id:old('especialidad_id')}}" selected="selected"  >{{ isset($persona->especialidad_id)?$persona->especialidad_id:old('especialidad_id')}}</option>
            <option value="1">Urologia</option>
-           <option value="2">Dermatologia</option>
+           <option value="2">Ginecologia</option>
            <option value="3">Oftalmologia</option>
            <option value="4">Traumatologia</option>
         </select>

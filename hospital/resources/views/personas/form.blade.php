@@ -60,7 +60,7 @@
               echo "Urologia";
            }else{
                if($persona->especialidad_id==2){
-                  echo "Dermatologia";
+                  echo "Ginecologia";
                }else{
                    if($persona->especialidad_id==3){
                         echo "oftalmologia";

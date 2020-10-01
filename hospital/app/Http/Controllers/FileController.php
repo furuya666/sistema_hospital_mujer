@@ -74,6 +74,8 @@ class FileController extends Controller
             $datosFile=request()->except('_token');
             if($request->hasfile('pdf')){
                 $datosFile['pdf']=$request->file('pdf')->store('uploads','public');
+            }else{
+                $datosFile['pdf']='default';
             }
             ///
             $da =Persona::where('id',$request->input('persona_id'))->count();
@@ -137,7 +139,6 @@ class FileController extends Controller
     {
         //
         $campos=[
-            'persona_id'=>'required|string|',
             'certificado_estudio' => 'required|string|',
             'certificado_trabajo' => 'required|string|',
             'certificado_contraloria' => 'required|string|',

@@ -48,7 +48,7 @@ th{
                 echo "urologia";
              }else{
                  if($persona->especialidad_id==2){
-                    echo "dermatologia";
+                    echo "ginecologia";
                  }else{
                      if($persona->especialidad_id==3){
                           echo "oftalmologia";

@@ -160,7 +160,7 @@
     <select name="Buscador1" id="Buscador1"  class="form-control mr-sm-2" required autocomplete="off">
            <option value="" selected="selected"  >Seleccione una Especialidad</option>
            <option value="1">Urologia</option>
-           <option value="2">Dermatologia</option>
+           <option value="2">Ginecologia</option>
            <option value="3">Oftalmologia</option>
            <option value="4">Traumatologia</option>
         </select>
