@@ -89,10 +89,11 @@ required>
 <label for="especialidad" class="control-label">{{'Especialidad'}}</label>
 <select name="especialidad_id" id="especialidad_id"  class="form-control {{$errors->has('especialidad_id')? 'is-invalid':''}}"  required>
            <option value="{{ isset($persona->especialidad_id)?$persona->especialidad_id:old('especialidad_id')}}" selected="selected"  >{{ isset($persona->especialidad_id)?$persona->especialidad_id:old('especialidad_id')}}</option>
-           <option value="1">Urologia</option>
+           <option value="1">Obstetricia</option>
            <option value="2">Ginecologia</option>
-           <option value="3">Oftalmologia</option>
-           <option value="4">Traumatologia</option>
+           <option value="3">Neonatologia</option>
+           <option value="4">Anestesiologia</option>
+           <option value="5">Terapia Intensiva</option>
         </select>
 {!!  $errors->first('especialidad_id','<div class="invalid-feedback">:message</div>')!!}
 </div>

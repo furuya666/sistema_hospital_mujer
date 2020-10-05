@@ -44,19 +44,23 @@ th{
             <td><center>{{$persona->id}}</center></td>
             <td><center>{{$persona->nombre}} {{$persona->apellido_paterno}} {{$persona->apellido_materno}}</center></td>
            <td class="b"><center><?php
-            if( $persona->especialidad_id==1){
-                echo "urologia";
+           if( $persona->especialidad_id==1){
+            echo "obstetricia";
+         }else{
+             if($persona->especialidad_id==2){
+                echo "ginecologia";
              }else{
-                 if($persona->especialidad_id==2){
-                    echo "ginecologia";
+                 if($persona->especialidad_id==3){
+                      echo "neonatologia";
                  }else{
-                     if($persona->especialidad_id==3){
-                          echo "oftalmologia";
+                     if($persona->especialidad_id==4){
+                      echo "anestesiologia";
                      }else{
-                         echo "traumatologia";
+                      echo "terapia intensiva";
                      }
                  }
              }
+         }
            ?></center></td>
             <td class="e"><center>{{$persona->telefono}}</center</td>
         </tr>
